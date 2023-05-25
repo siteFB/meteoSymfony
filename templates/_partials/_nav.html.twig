@@ -5,23 +5,17 @@
                     <span class="navbar-toggler-icon red"></span>
                 </button>
                 <div class="container" id="contenerNav">
-                    <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-end">
                         <ul class="nav nav-pills">
         
-                            <?php if (!isset($_SESSION["user"])) : ?>
+                            {% if app.user %}
+                                <li class="nav-item"><a href="{{ path('app_logout') }}" class="nav-link text-white">Se déconnecter</a></li>
 
-                                <li class="nav-item"><a href="" class="nav-link text-white">Se connecter</a></li>
-                                <li class="nav-item"><a href="#inscription" class="nav-link text-white">S'inscrire</a></li>
+                            {% else %}
+                                <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link text-white">Se connecter</a></li>
+                                <li class="nav-item"><a href="{{ path('app_register') }}" class="nav-link text-white">S'inscrire</a></li>
 
-                            <?php elseif (isset($_SESSION["user"]) && ($_SESSION["user"]["statut"] == "Membre")) : ?>
-                       
-                                <li class="nav-item"><a href="../../formulaires/deconnexion.php" class="nav-link text-white">Se déconnecter</a></li>
-
-                            <?php elseif (isset($_SESSION["user"]) && ($_SESSION["user"]["statut"] == "Admin")) : ?>
-
-                                <li class="nav-item"><a href="../../formulaires/deconnexion.php" class="nav-link text-white">Se déconnecter</a></li>
-
-                            <?php endif; ?>
+                            {% endif %}
 
                         </ul>
                     </div>
@@ -31,16 +25,16 @@
 
                         <?php if (!isset($_SESSION["user"])) : ?>
 
-                        <li class="nav-item"><a href="" class="nav-link text-white">Se connecter</a></li>
-                        <li class="nav-item"><a href="#inscription" class="nav-link text-white">S'inscrire</a></li>
+                        <li class="nav-item"><a href="{{ path('app_login') }}" class="nav-link text-white">Se connecter</a></li>
+                        <li class="nav-item"><a href="{{ path('app_register') }}" class="nav-link text-white">S'inscrire</a></li>
 
                     <?php elseif (isset($_SESSION["user"]) && ($_SESSION["user"]["statut"] == "Membre")) : ?>
                
-                        <li class="nav-item"><a href="../../formulaires/deconnexion.php" class="nav-link text-white">Se déconnecter</a></li>
+                        <li class="nav-item"><a href="{{ path('app_logout') }}" class="nav-link text-white">Se déconnecter</a></li>
 
                     <?php elseif (isset($_SESSION["user"]) && ($_SESSION["user"]["statut"] == "Admin")) : ?>
 
-                        <li class="nav-item"><a href="../../formulaires/deconnexion.php" class="nav-link text-white">Se déconnecter</a></li>
+                        <li class="nav-item"><a href="{{ path('app_logout') }}" class="nav-link text-white">Se déconnecter</a></li>
 
                     <?php endif; ?>
 

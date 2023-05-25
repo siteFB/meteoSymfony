@@ -20,7 +20,7 @@ class Messagerie
 
     #[ORM\ManyToOne(inversedBy: 'mess')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Users $users_destinataire = null;
+    private ?Users $id_destinataire = null;
 
     #[ORM\Column(length: 30)]
     private ?string $sujet = null;
@@ -28,8 +28,8 @@ class Messagerie
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $message = null;
 
-    #[ORM\Column(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
-    private $created_at;
+    #[ORM\Column]
+    private ?\DateTimeImmutable $created_at = null;
 
     public function getId(): ?int
     {
@@ -50,12 +50,12 @@ class Messagerie
 
     public function getIdDestinataire(): ?Users
     {
-        return $this->users_destinataire;
+        return $this->id_destinataire;
     }
 
     public function setIdDestinataire(?Users $id_destinataire): self
     {
-        $this->users_destinataire = $id_destinataire;
+        $this->id_destinataire = $id_destinataire;
 
         return $this;
     }
