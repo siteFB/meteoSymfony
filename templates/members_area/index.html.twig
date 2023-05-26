@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace membres{% endblock %}
+
+{% block body %}
+
+<h1 class="display-6 fw-bold text-center mb-5 mt-5 text-primary">Bienvenu.e {membre} ! Vous êtes dans votre espace membre!</h1>
+
+<div class='container my-2 pb-5 bg-light'>
+    <div class='col-md-12 text-center'>
+        <button type='button' class='btn btn-warning'><a href="{{ path('app_members_area_profilMembre') }}">Mon profil</a></button>
+        <button type='button' class='btn btn-success'><a class="text-white" href="{{ path('app_messagerie_index') }}">Ma messagerie</a></button>
+    </div>
+</div>
+
+{% endblock %}

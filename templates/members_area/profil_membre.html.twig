@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace membres{% endblock %}
+
+{% block body %}
+<h1 class="display-6 fw-bold text-center mb-5 mt-5 text-primary">Bienvenu.e *membre* ! Vous êtes dans votre espace membre!</h1>
+
+<button type="button" class="btn btn-primary mb-5" style="float:right;"><a class="text-white" href="{{ path('app_members_area_dashbordMembre') }}">Retour au dashboard</a></button>
+
+<div class="container mt-4 mb-5">
+    <div class="text-center darken-grey-text mb-4">
+        <table class="table">
+            <tbody>
+                <tr class="table-warning">
+                    <th scope="row">Mon pseudo</th>
+                    <td><?php echo $_SESSION["user"]['pseudo'] ?></td>
+                    <td>Modifier</td>
+                </tr>
+                <tr class="table-success">
+                    <th scope="row">Mon e-mail</th>
+                    <td><?php echo $_SESSION["user"]['email'] ?></td>
+                    <td>Modifier</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+{% endblock %}
