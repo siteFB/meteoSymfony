@@ -7,22 +7,21 @@
 <h2 class="display-5 fw-bold text-center mb-5 mt-5">Consulter la météo</h2>
 <div class="container">
     <div class="row mb-5">
-        <?php
-        foreach ($result as $ephemeride) {
-        ?>
+       
+        {%  for ephem in ephemeride %}
             <div class="col-md-4 mb-5">
                 <div class="card col h-100">
-                    <img src="//public/images/image1.jpg" class="card-img-top h-100">
+                    <div>
+                    <img class="card-img-top h-50" src="">
+                    </div>
                     <div class="card-body">
-                        <h3 class="card-title">{{  ephemeride.titre }}</h3>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor, dignissim sit amet, adipiscing nec, ultricies sed, dolor.</p>
-                        <button type="button" class="btn btn-primary" style="float:left;"><a class="text-white" href="{{ path('app_consulter_meteo_jour') }}">Consulter</a></button>
+                        <h3 class="card-title">{{ ephem.titre }}</h3>
+                        <p class="card-text">{{ ephem.description }}</p>
+                        <button type="button" class="btn btn-primary" style="float:left;"><a class="text-white" href="{{ path('app_consulter_meteo_index') }}">Consulter</a></button>
                     </div>
                 </div>
             </div>
-        <?php
-        }
-        ?>
+            {% endfor %}
     </div>
 </div>
 
