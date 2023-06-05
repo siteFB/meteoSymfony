@@ -10,13 +10,15 @@
        
         {%  for ephem in ephemeride %}
             <div class="col-md-4 mb-5">
-                <div class="card col h-100">
-                    <div>
-                    <img class="card-img-top h-50" src="">
+                <div class="card col" style="height:600px">
+                    <div style="height:40vh">
+                    <img class="card-img-top h-100" src={{ '/images/' ~ ephem.image }}>
                     </div>
                     <div class="card-body">
-                        <h3 class="card-title">{{ ephem.titre }}</h3>
-                        <p class="card-text">{{ ephem.description }}</p>
+                        <h3 class="card-title" style="height:5vh;">{{ ephem.titre }}</h3>
+                        <span class="truncate">
+                        <p class="card-text truncate" >{{ ephem.description }}</p>
+                        </span>
                         <button type="button" class="btn btn-primary" style="float:left;"><a class="text-white" href="{{ path('app_consulter_meteo_index') }}">Consulter</a></button>
                     </div>
                 </div>
