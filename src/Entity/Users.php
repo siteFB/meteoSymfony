@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
 use App\Repository\UsersRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,10 +11,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use App\Entity\Trait\SlugTrait;
 #[ORM\Entity(repositoryClass: UsersRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Il existe déjà un compte avec cet email')]
 class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use CreatedAtTrait;
+    use SlugTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -34,20 +39,17 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 30)]
     private ?string $pseudo = null;
 
-    #[ORM\Column(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'])]
-    private $created_at;
+    #[ORM\OneToMany(mappedBy: 'sender', targetEntity: Messagerie::class)]
+    private Collection $expediteur;
 
-    #[ORM\OneToMany(mappedBy: 'users_expediteur', targetEntity: Messagerie::class)]
-    private Collection $messages;
-
-    #[ORM\OneToMany(mappedBy: 'id_destinataire', targetEntity: Messagerie::class)]
-    private Collection $mess;
+    #[ORM\OneToMany(mappedBy: 'recipient', targetEntity: Messagerie::class)]
+    private Collection $destinataire;
 
     public function __construct()
     {
-        $this->messages = new ArrayCollection();
-        $this->mess = new ArrayCollection();
         $this->created_at = new \DatetimeImmutable();
+        $this->expediteur = new ArrayCollection();
+        $this->destinataire = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -132,42 +134,30 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->created_at;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
-    {
-        $this->created_at = $created_at;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Messagerie>
      */
-    public function getMessages(): Collection
+    public function getExpediteur(): Collection
     {
-        return $this->messages;
+        return $this->expediteur;
     }
 
-    public function addMessage(Messagerie $message): self
+    public function addExpediteur(Messagerie $expediteur): self
     {
-        if (!$this->messages->contains($message)) {
-            $this->messages->add($message);
-            $message->setUsersExpediteur($this);
+        if (!$this->expediteur->contains($expediteur)) {
+            $this->expediteur->add($expediteur);
+            $expediteur->setSender($this);
         }
 
         return $this;
     }
 
-    public function removeMessage(Messagerie $message): self
+    public function removeExpediteur(Messagerie $expediteur): self
     {
-        if ($this->messages->removeElement($message)) {
+        if ($this->expediteur->removeElement($expediteur)) {
             // set the owning side to null (unless already changed)
-            if ($message->getUsersExpediteur() === $this) {
-                $message->setUsersExpediteur(null);
+            if ($expediteur->getSender() === $this) {
+                $expediteur->setSender($this);
             }
         }
 
@@ -177,30 +167,31 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Messagerie>
      */
-    public function getMess(): Collection
+    public function getDestinataire(): Collection
     {
-        return $this->mess;
+        return $this->destinataire;
     }
 
-    public function addMess(Messagerie $mess): self
+    public function addDestinataire(Messagerie $destinataire): self
     {
-        if (!$this->mess->contains($mess)) {
-            $this->mess->add($mess);
-            $mess->setIdDestinataire($this);
+        if (!$this->destinataire->contains($destinataire)) {
+            $this->destinataire->add($destinataire);
+            $destinataire->setRecipient($this);
         }
 
         return $this;
     }
 
-    public function removeMess(Messagerie $mess): self
+    public function removeDestinataire(Messagerie $destinataire): self
     {
-        if ($this->mess->removeElement($mess)) {
+        if ($this->destinataire->removeElement($destinataire)) {
             // set the owning side to null (unless already changed)
-            if ($mess->getIdDestinataire() === $this) {
-                $mess->setIdDestinataire(null);
+            if ($destinataire->getRecipient() === $this) {
+                $destinataire->setRecipient(null);
             }
         }
 
         return $this;
     }
+
 }

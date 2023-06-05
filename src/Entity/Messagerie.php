@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\Trait\CreatedAtTrait;
+use App\Entity\Trait\SlugTrait;
 use App\Repository\MessagerieRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,55 +11,37 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: MessagerieRepository::class)]
 class Messagerie
 {
+    use CreatedAtTrait;
+    use SlugTrait;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'messages')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Users $users_expediteur = null;
-
-    #[ORM\ManyToOne(inversedBy: 'mess')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Users $id_destinataire = null;
-
     #[ORM\Column(length: 30)]
-    private ?string $sujet = null;
+    private ?string $sujet;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $message = null;
 
-    #[ORM\Column]
-    private ?\DateTimeImmutable $created_at = null;
+    #[ORM\ManyToOne(inversedBy: 'expediteur')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Users $sender = null;
+
+    #[ORM\ManyToOne(inversedBy: 'destinataire')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Users $recipient = null;
+
+
+    public function __construct()
+    {
+        $this->created_at = new \DatetimeImmutable();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUsersExpediteur(): ?Users
-    {
-        return $this->users_expediteur;
-    }
-
-    public function setUsersExpediteur(?Users $users_expediteur): self
-    {
-        $this->users_expediteur = $users_expediteur;
-
-        return $this;
-    }
-
-    public function getIdDestinataire(): ?Users
-    {
-        return $this->id_destinataire;
-    }
-
-    public function setIdDestinataire(?Users $id_destinataire): self
-    {
-        $this->id_destinataire = $id_destinataire;
-
-        return $this;
     }
 
     public function getSujet(): ?string
@@ -84,15 +68,28 @@ class Messagerie
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getSender(): ?Users
     {
-        return $this->created_at;
+        return $this->sender;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    public function setSender(?Users $sender): self
     {
-        $this->created_at = $created_at;
+        $this->sender = $sender;
 
         return $this;
     }
+
+    public function getRecipient(): ?Users
+    {
+        return $this->recipient;
+    }
+
+    public function setRecipient(?Users $recipient): self
+    {
+        $this->recipient = $recipient;
+
+        return $this;
+    }
+
 }
