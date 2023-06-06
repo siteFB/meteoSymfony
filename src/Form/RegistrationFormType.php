@@ -22,7 +22,8 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'attr' => [
                     'class' => 'form-control'
-                ]
+                ],
+                'label' => 'Votre email'
             ])
             ->add('pseudo', TextType::class, [
                 'attr' => [
@@ -56,6 +57,12 @@ class RegistrationFormType extends AbstractType
                         'max' => 4096,
                     ]),
                 ],
+            ])
+
+            ->add('slug', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control'
+                ]
             ])
         ;
     }
