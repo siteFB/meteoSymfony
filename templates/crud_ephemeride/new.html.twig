@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle éphéméride{% endblock %}
+
+{% block body %}
+<section>
+    <div class="container mt-5">
+        <div class="row">
+            <span class="d-flex justify-content-center">
+                <h1 class="text-center pb-4 mx-4 text-primary my-4">Créer une éphéméride</h1>
+            </span>
+
+    <div class="form mb-2">
+    {{ include('crud_ephemeride/_form.html.twig') }}
+    </div>
+
+    <span class="text-center"><a href="{{ path('app_crud_ephemeride_index') }}" class="btn btn-primary mb-1 w-25">Retour à la liste</a></span>
+</div>
+<hr>
+</div>
+</section>
+{% endblock %}

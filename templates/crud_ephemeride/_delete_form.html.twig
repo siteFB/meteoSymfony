@@ -1,0 +1,5 @@
+<form method="post" action="{{ path('app_crud_ephemeride_delete', {'id': ephemeride.id}) }}"
+    onsubmit="return confirm('Êtes-vous sur de vouloir supprimer cet article ?');" class="d-inline-block">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ ephemeride.id) }}">
+    <button class="btn btn-danger">Supprimer</button>
+</form>
