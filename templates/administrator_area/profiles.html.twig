@@ -21,11 +21,10 @@
             </tr>
           </thead>
           <tbody>
-            <?php
-            foreach ($result as $user) {
-            ?>
+            <tbody>
+              {% for users in users %}
               <tr>
-                <td><?php echo strip_tags(stripslashes(htmlentities(trim($user['idUser'])))) ?></td>
+                <td>{{ user.id }}</td>
                 <td><?php echo strip_tags(stripslashes(htmlentities(trim($user['pseudo'])))) ?></td>
                 <td><?php echo strip_tags(stripslashes(htmlentities(trim($user['email'])))) ?></td>
                 <td><?php echo strip_tags(stripslashes(htmlentities(trim($user['dateInscrit'])))) ?></td>
@@ -36,9 +35,7 @@
                     }; ?>
                 </td>
               </tr>
-            <?php
-            }
-            ?>
+            {% endfor %}
           </tbody>
         </table>
       </div>
