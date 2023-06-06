@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Éphemeride index{% endblock %}
+
+{% block body %}
+<section>
+    <div class="container mt-5">
+        <div class="row">
+            <span class="d-flex justify-content-center">
+                <h1 class="text-center pb-4 mx-4 text-primary my-4">Éphemeride index</h1>
+            </span>
+
+            <table class="table col-md-4 mt-1 mb-5">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Titre</th>
+                        <th>Description</th>
+                        <th>Image</th>
+                        <th>Slug</th>
+                        <th>actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ephemeride in ephemerides %}
+                    <tr>
+                        <td>{{ ephemeride.id }}</td>
+                        <td>{{ ephemeride.titre }}</td>
+                        <td>{{ ephemeride.description }}</td>
+                        <td>{{ ephemeride.image }}</td>
+                        <td>{{ ephemeride.slug }}</td>
+                        <td>
+                            <a href="{{ path('app_crud_ephemeride_show', {'id': ephemeride.id}) }}"
+                                class="btn btn-primary w-100 active" role="button" aria-pressed="true">Voir</a>
+                            <a href="{{ path('app_crud_ephemeride_edit', {'id': ephemeride.id}) }}"
+                                class="btn btn-success w-100 active" role="button" aria-pressed="true">Modifier</a>
+                                <span class="btn btn-danger active w-100" onsubmit="return confirm('Êtes-vous sur de vouloir supprimer cet article ?');">{{ include('crud_ephemeride/_delete_form.html.twig')
+                                }}</span>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5">Aucun résultat</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="{{ path('app_crud_ephemeride_new') }}" class="btn btn-warning my-2">Créer une nouvelle
+                éphéméride</a>
+        </div>
+        <hr>
+    </div>
+</section>
+{% endblock %}

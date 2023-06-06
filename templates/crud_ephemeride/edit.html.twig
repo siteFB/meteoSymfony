@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Ephemeride{% endblock %}
+
+{% block body %}
+<section>
+    <div class="container mt-5 justify-content-center ">
+        <div class="row  justify-content-center">
+<span class="d-flex justify-content-center">
+    <h1 class="text-center pb-4 mx-4 text-primary my-4">Modifier l'éphéméride</h1>
+</span>
+    {{ include('crud_ephemeride/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+<div class="text-center w-50">
+
+    <div class="btn btn-danger active mt-2 mb-1 w-25">{{ include('crud_ephemeride/_delete_form.html.twig')
+    }}</div>
+
+    <div>
+    <a href="{{ path('app_crud_ephemeride_index') }}" class="btn btn-primary mb-3 w-25">Retour à la liste</a>
+    </div>
+
+</div>
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,15 @@
+{{ form_start(form) }}
+<section>
+    <div class="container mt-5 d-flex justify-content-center">
+        <div class="row w-50 bg-light">
+<div class="text-center bg-light fs-5 lh-lg">
+
+
+    {{ form_widget(form) }}
+    <button class="btn btn-success w-100">{{ button_label|default('Enregistrer') }}</button>
+    </div>
+</div>
+<hr>
+</div>
+</section>
+{{ form_end(form) }}

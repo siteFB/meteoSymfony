@@ -2,14 +2,16 @@
 @import url(https://use.fontawesome.com/releases/v5.15.3/css/all.css);
 @import url(https://fonts.googleapis.com/css?family=Poiret+One|Anton|Roboto:100,400);
 
-h1, h2, h3 { 
-	font-family: 'Poiret One'; 
-	font-size: calc(1.2rem + 1.4vmin);
-	font-weight: bold; 
+h1,
+h2,
+h3 {
+  font-family: "Poiret One";
+  font-size: calc(1.2rem + 1.4vmin);
+  font-weight: bold;
 }
 
-a { 
-	text-decoration: none; 
+a {
+  text-decoration: none;
 }
 
 .navbar-toggler:focus {
@@ -20,33 +22,31 @@ a {
 }
 
 .divider {
-height: 2rem;
-background-color: rgba(0, 0, 0, .1);
-border: solid rgba(0, 0, 0, .15);
-border-width: 1px 0;
-box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+  height: 2rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  border: solid rgba(0, 0, 0, 0.15);
+  border-width: 1px 0;
+  box-shadow: inset 0 0.5em 1.5em rgba(0, 0, 0, 0.1),
+    inset 0 0.125em 0.5em rgba(0, 0, 0, 0.15);
 }
 
 .truncate {
-    display: block;
+  display: block;
 }
 
 .truncate:after {
-    position:relative;
-	top: -15px;
-	left:30vh;
-    content:'...';
+  position: relative;
+  top: -15px;
+  left: 30vh;
+  content: "...";
 }
-.truncate p{
-    display:block;
-    margin:0;
-    overflow:hidden;
-    height: 75px;
+.truncate p {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  height: 75px;
 }
 
 .truncate:hover:after {
-    display:none;
+  display: none;
 }
-
-
-
