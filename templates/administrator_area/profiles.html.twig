@@ -22,9 +22,9 @@
           </thead>
           <tbody>
             <tbody>
-              {% for users in users %}
+          
               <tr>
-                <td>{{ user.id }}</td>
+                <td>id</td>
                 <td><?php echo strip_tags(stripslashes(htmlentities(trim($user['pseudo'])))) ?></td>
                 <td><?php echo strip_tags(stripslashes(htmlentities(trim($user['email'])))) ?></td>
                 <td><?php echo strip_tags(stripslashes(htmlentities(trim($user['dateInscrit'])))) ?></td>
@@ -35,7 +35,7 @@
                     }; ?>
                 </td>
               </tr>
-            {% endfor %}
+          
           </tbody>
         </table>
       </div>

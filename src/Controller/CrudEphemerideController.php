@@ -10,20 +10,23 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/crud/ephemeride')]
+#[Route('/admin/crud/ephemeride', name: 'admin/crud_ephemeride_')]
 class CrudEphemerideController extends AbstractController
 {
-    #[Route('/', name: 'app_crud_ephemeride_index', methods: ['GET'])]
+
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(EphemerideRepository $ephemerideRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         return $this->render('crud_ephemeride/index.html.twig', [
             'ephemerides' => $ephemerideRepository->findAll(),
         ]);
     }
 
-    #[Route('/new', name: 'app_crud_ephemeride_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, EphemerideRepository $ephemerideRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $ephemeride = new Ephemeride();
         $form = $this->createForm(EphemerideType::class, $ephemeride);
         $form->handleRequest($request);
@@ -31,7 +34,7 @@ class CrudEphemerideController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $ephemerideRepository->save($ephemeride, true);
 
-            return $this->redirectToRoute('app_crud_ephemeride_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin/crud_ephemeride_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('crud_ephemeride/new.html.twig', [
@@ -40,24 +43,26 @@ class CrudEphemerideController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_crud_ephemeride_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(Ephemeride $ephemeride): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         return $this->render('crud_ephemeride/show.html.twig', [
             'ephemeride' => $ephemeride,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_crud_ephemeride_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Ephemeride $ephemeride, EphemerideRepository $ephemerideRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         $form = $this->createForm(EphemerideType::class, $ephemeride);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $ephemerideRepository->save($ephemeride, true);
 
-            return $this->redirectToRoute('app_crud_ephemeride_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('admin/crud_ephemeride_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('crud_ephemeride/edit.html.twig', [
@@ -66,13 +71,14 @@ class CrudEphemerideController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_crud_ephemeride_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Ephemeride $ephemeride, EphemerideRepository $ephemerideRepository): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         if ($this->isCsrfTokenValid('delete'.$ephemeride->getId(), $request->request->get('_token'))) {
             $ephemerideRepository->remove($ephemeride, true);
         }
 
-        return $this->redirectToRoute('app_crud_ephemeride_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('admin/crud_ephemeride_index', [], Response::HTTP_SEE_OTHER);
     }
 }
