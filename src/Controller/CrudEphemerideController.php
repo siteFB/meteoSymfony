@@ -75,7 +75,7 @@ class CrudEphemerideController extends AbstractController
     public function delete(Request $request, Ephemeride $ephemeride, EphemerideRepository $ephemerideRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        if ($this->isCsrfTokenValid('delete'.$ephemeride->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $ephemeride->getId(), $request->request->get('_token'))) {
             $ephemerideRepository->remove($ephemeride, true);
         }
 
