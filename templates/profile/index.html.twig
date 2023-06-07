@@ -10,12 +10,12 @@
             <tbody>
                 <tr class="table-warning">
                     <th scope="row">Mon pseudo</th>
-                    <td><?php echo $_SESSION["user"]['pseudo'] ?></td>
+                    <td>{{ users.pseudo }}</td>
                     <td>Modifier</td>
                 </tr>
                 <tr class="table-success">
                     <th scope="row">Mon e-mail</th>
-                    <td><?php echo $_SESSION["user"]['email'] ?></td>
+                    <td>{{ users.email }}</td>
                     <td>Modifier</td>
                 </tr>
             </tbody>

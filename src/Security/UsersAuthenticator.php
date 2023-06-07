@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\Users;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+
 
 class UsersAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -47,8 +49,17 @@ class UsersAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
+       /* if ('users.roles' == ["ROLE_ADMIN"])
+        return new RedirectResponse($this->urlGenerator->generate('app_administrator_area_dashboard'));
+
+        else {
+            if ('users.roles' == ["ROLE_USER"]) {
+                return new RedirectResponse($this->urlGenerator->generate('app_main'));
+            }
+        }*/
+
         // For example:
-        return new RedirectResponse($this->urlGenerator->generate('app_main'));
+        return new RedirectResponse($this->urlGenerator->generate('app_members_area_index'));
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     }
 
