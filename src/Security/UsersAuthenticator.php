@@ -49,18 +49,15 @@ class UsersAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-       /* if ('users.roles' == ["ROLE_ADMIN"])
+        $users = $token->getUser();
+
+        if (in_array('ROLE_ADMIN', $users->getRoles())){
         return new RedirectResponse($this->urlGenerator->generate('app_administrator_area_dashboard'));
+        }
 
-        else {
-            if ('users.roles' == ["ROLE_USER"]) {
-                return new RedirectResponse($this->urlGenerator->generate('app_main'));
-            }
-        }*/
-
-        // For example:
+        else if (in_array('ROLE_USER', $users->getRoles())){
         return new RedirectResponse($this->urlGenerator->generate('app_members_area_index'));
-        // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        }
     }
 
     protected function getLoginUrl(Request $request): string

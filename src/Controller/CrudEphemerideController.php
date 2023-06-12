@@ -55,7 +55,7 @@ class CrudEphemerideController extends AbstractController
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Ephemeride $ephemeride, EphemerideRepository $ephemerideRepository): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('EPHEMERIDE_EDIT', $ephemeride);   //Security -> Voter -> EphemVot.php  "edit" réservé à un role (ici admin...) si erreur: ex: "EPHEMERIDE_EDI" ==> acceess denied!
         $form = $this->createForm(EphemerideType::class, $ephemeride);
         $form->handleRequest($request);
 
@@ -75,7 +75,7 @@ class CrudEphemerideController extends AbstractController
     public function delete(Request $request, Ephemeride $ephemeride, EphemerideRepository $ephemerideRepository): Response
     {
         $this->denyAccessUnlessGranted('ROLE_ADMIN');
-        if ($this->isCsrfTokenValid('delete'.$ephemeride->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $ephemeride->getId(), $request->request->get('_token'))) {
             $ephemerideRepository->remove($ephemeride, true);
         }
 
