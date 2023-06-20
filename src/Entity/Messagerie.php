@@ -2,16 +2,17 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait\CreatedAtTrait;
+//use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\SlugTrait;
 use App\Repository\MessagerieRepository;
+use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: MessagerieRepository::class)]
 class Messagerie
 {
-    use CreatedAtTrait;
+ 
     use SlugTrait;
 
     #[ORM\Id]
@@ -33,11 +34,17 @@ class Messagerie
     #[ORM\JoinColumn(nullable: false)]
     private ?Users $recipient = null;
 
+    //#[ORM\Column(type: Types::DATETIME_IMMUTABLE, nullable: true)]
+    //private ?DateTimeImmutable $created_at = null;
 
-    public function __construct()
+    #[ORM\Column(type: 'datetime_immutable', options: ['default' => 'CURRENT_TIMESTAMP'], nullable: true)]
+    private ?DateTimeImmutable $created_at = null;
+
+    /*public function __construct()
     {
         $this->created_at = new \DatetimeImmutable();
-    }
+        return $this->created_at;
+    }*/
 
     public function getId(): ?int
     {
@@ -89,6 +96,17 @@ class Messagerie
     {
         $this->recipient = $recipient;
 
+        return $this;
+    }
+
+    public function getCreated_at(): ?DateTimeImmutable
+    {
+        return $this->created_at;
+    }
+
+    public function setCreated_at(?DateTimeImmutable $created_at): self
+    {
+        $this->created_at = $created_at;
         return $this;
     }
 
