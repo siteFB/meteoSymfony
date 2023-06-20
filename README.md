@@ -18,6 +18,6 @@ Creating data fixtures speeds up the work.<br>
 I stored my images and my CSS and JS in a "public" folder.<br>
 Do not forget to switch to "prod" version to also test "in real life".<br><br>
 
-In short, the most interesting for me, remains the handling with PHP! :P<br>
+In short, the most interesting for me, remains the handling with PHP! :smile:<br>
 
 // A detail to remember: Not all references are included in the Symfony maker: for this reason I added the CURRENT_TIMESTAMP myself, for example.
