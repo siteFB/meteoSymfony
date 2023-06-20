@@ -1,0 +1,5 @@
+<form method="post" action=" {# {{ path('app_messagerie_delete', {'id': messagerie.id}) }} #}"
+    onsubmit="return confirm('Êtes-vous sur de vouloir supprimer ce message ?');" class="d-inline-block">
+    <input type="hidden" name="_token" value=" {# {{ csrf_token('delete' ~ messagerie.id) }} #}">
+    <i class="fa fa-trash" aria-hidden="true"></i>
+</form>
