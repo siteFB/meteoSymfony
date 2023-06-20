@@ -1,3 +1,6 @@
+[![](https://img.shields.io/badge/BOOTSTRAP-blue?style=for-the-badge)]
+[![](https://img.shields.io/badge/SYMFONY.io-orange?style=for-the-badge)]
+
 # My first site with Symfony: meteoSymfony <br><br>
 
 Here I use version 6.<br>
