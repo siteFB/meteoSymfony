@@ -8,11 +8,16 @@ I have already prepared a diagram in order to create clear makers.<br><br>
 
 To create my database I directly used Laragon which proposes to create and name a site in Symfony version.<br>
 I then installed it in vscode. I installed all necessary requirements for Symfony 6.<br>
-The 1st table created corresponds to users and Symfony provides a maker for authentication.<br>
-Then "Ephemeride" with the maker:entity. I didn't use Symfony's Mailer because my messaging is internal to the site... Table "Messagerie" includes 2 foreign keys that come from Users: I therefore had to create 2 relationships.<br><br>
 
-// A detail to remember: Not all references are included in the Symfony maker: for this reason I added the CURRENT_TIMESTAMP myself, for example.<br><br>
+To create my database I directly used Laragon which proposes to create and name a site in Symfony version.<br>
+I then installed it in vscode. I have installed all necessary requirements for Symfony 6.<br>
+The "Messaging" table I did not use the Symfony Mailer because my messaging is internal to the site. It has 2 foreign keys that come from Users: I therefore had to create 2 relationships.<br>
+Once you understand how Symfony was organized, it's easy to understand the creation of classes and their locations.<br>
+Entities are the reference classes, controllers are used to create paths, templates contain twig files to display, we can also use a form command that will take care of all our data, and even the connection is created on its own with the "auth" command...<br>
+Creating data fixtures speeds up the work.<br>
+I stored my images and my CSS and JS in a "public" folder.<br>
+Do not forget to switch to "prod" version to also test "in real life".<br><br>
 
-For this 1st experience with Symfony project, I migrated to each table and I end up with several versions of migrations. Next time, I'll know that it's easier to send all my database in one go so that I only get one version of migrations, at the beginning...<br>
-To build the blocks common to all the pages, we use a base to which we refer and we draw from it what we need. If you don't need it, just ignore the block.<br>
-Setting up the style in a public folder and accessible with the asset() function. Be careful, no tag in twig: add it yourself to be sure with responsive!<br>
+In short, the most interesting for me, remains the handling with PHP! :P<br>
+
+// A detail to remember: Not all references are included in the Symfony maker: for this reason I added the CURRENT_TIMESTAMP myself, for example.
